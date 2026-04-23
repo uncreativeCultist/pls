@@ -13,9 +13,9 @@ if [[ "$1" == "update" ]]; then
     SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
     if command -v wget &>/dev/null # yo do we have wget
     then
-      rm "$SCRIPT_DIR/pls"
+      rm "$SCRIPT_DIR/pls.sh"
       wget "https://raw.githubusercontent.com/uncreativeCultist/pls/refs/heads/main/pls.sh" -P $SCRIPT_DIR 
-      chmod +x "$SCRIPT_DIR/pls"
+      chmod +x "$SCRIPT_DIR/pls.sh"
       echo "pls has been updated!"
     else
       echo "update self requires wget. please install wget!!"
