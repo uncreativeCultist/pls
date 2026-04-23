@@ -1,5 +1,5 @@
 #!/bin/bash
-PLS_VER=042326c
+PLS_VER=042326d
 
 ## please update ----------------------------------
 if [[ "$1" == "update" ]]; then
@@ -71,6 +71,7 @@ if [[ "$1" == "update" ]]; then
        ## please update END----------------------------------
 elif [[ "$1" == "help" ]]; then
   echo "pls help - displays features (shows this list)"
+  echo "pls info - displays information about pls"
   echo "pls update - updates/upgrades all packages on your system across multiple package managers (pls not included)"
   echo pls update self - updates pls
   echo "pls install - install programs to your system using multiple package managers"
@@ -125,6 +126,12 @@ fi
   else
     echo "package '$2' couldn't be found :("
   fi
+elif [[ "$1" == "info" ]]; then
+  echo "pls - a stupid easy script to do things on linux"
+  echo "version $PLS_VER"
+  echo  
+  echo "for more information, pls visit"
+  echo "https://github.com/uncreativeCultist/pls"
 elif [[ "$1" == "" ]]; then
   echo "pls is not supposed to be ran on it's own!  "
   echo 'maybe try "pls help" to see possible arguments?'
