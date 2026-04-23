@@ -1,7 +1,5 @@
 #!/bin/bash
-PLS_VER=042326a
-#echo pls - $PLS_VER
-#echo -------------------
+PLS_VER=042326b
 
 ## please update ----------------------------------
 if [[ "$1" == "update" ]]; then
@@ -73,8 +71,60 @@ if [[ "$1" == "update" ]]; then
        ## please update END----------------------------------
 elif [[ "$1" == "help" ]]; then
   echo "pls help - displays features (shows this list)"
-  echo "pls update - updates/upgrades as packages on your system across multiple package managers (pls not included)"
+  echo "pls update - updates/upgrades all packages on your system across multiple package managers (pls not included)"
   echo pls update self - updates pls
+  echo "pls install - install programs to your system using multiple package managers"
+elif [[ "$1" == "install" ]]; then
+  DIDWEGETIT=notyet
+
+  if [[ "$DIDWEGETIT" != "yeah" ]]; then
+    if command -v apt-get &>/dev/null # apt-get handling - debian
+    then
+      echo "installing using apt-get"
+      if sudo apt-get install $2; then
+        DIDWEGETIT=yeah
+      else
+        echo "couldn't find it using apt-get, continuing on..."
+        echo   
+        DIDWEGETIT=notyet
+      fi
+    fi
+  fi
+
+  if [[ "$DIDWEGETIT" != "yeah" ]]; then
+    if command -v pacman &>/dev/null # pacman handling - arch
+    then
+      echo "installing using pacman"
+      if sudo pacman -Sy $2; then
+        DIDWEGETIT=yeah
+      else
+        DIDWEGETIT=notyet
+        echo "couldn't find it using pacman, continuing on..."
+        echo   
+      fi
+    fi
+  fi
+
+  if [[ "$DIDWEGETIT" != "yeah" ]]; then
+    if command -v flatpak &>/dev/null # flatpak handling
+    then
+      echo "installing using flatpak"
+      if sudo flatpak install $2; then
+        DIDWEGETIT=yeah
+      else
+        DIDWEGETIT=notyet
+        echo "couldn't find it using flatpak, continuing on..."
+        echo   
+    fi
+  fi
+fi
+
+
+  if [[ "$DIDWEGETIT" == "yeah" ]]; then
+    echo "package '$2' should be installed now!"
+  else
+    echo "package '$2' couldn't be found :("
+  fi
 else
   echo "'pls $1' is not a recognized command, sorry :("
   echo 'maybe try "pls help" to see possible arguments?'
