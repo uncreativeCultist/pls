@@ -1,5 +1,5 @@
 #!/bin/bash
-PLS_VER=042226e
+PLS_VER=042226f
 echo pls - $PLS_VER
 echo -------------------
 
@@ -72,8 +72,8 @@ if [[ "$1" == "update" ]]; then
     fi
        ## please update END----------------------------------
 elif [[ "$1" == "help" ]]; then
-  echo pls help - shows this list
-  echo "pls update - updates as much as possible (pls not included)"
+  echo "pls help - displays features (shows this list)"
+  echo "pls update - updates/upgrades as packages on your system across multiple package managers (pls not included)"
   echo pls update self - updates pls
 else
   echo "'pls $1' is not a recognized command, sorry :("
