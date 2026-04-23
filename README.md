@@ -1,5 +1,5 @@
 # pls
-a dead-easy script to do things on linux  
+a dead-easy bash script to do things on linux  
 this is a passion project made to help my tech-illiterate boyfriend with linux c:
 # features
 `pls help` - displays features (shows this list)  
