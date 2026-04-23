@@ -2,8 +2,9 @@
 a stupid easy script to do things on linux  
 this is a passion project made to help my tech-illiterate boyfriend with linux c:
 # features
-`pls help` - displays features (shows this list)  
-`pls update` - updates/upgrades as packages on your system across multiple package managers  
+`pls help` - displays features (shows this list)
+`pls info` - displays information about pls
+`pls update` - updates/upgrades as packages on your system across multiple package managers (pls not included)  
 `pls update self` - updates pls  
 `pls install` - install programs to your system using multiple package managers  
 more features are soon to come, i promise.
