@@ -1,5 +1,5 @@
 #!/bin/bash
-PLS_VER=042226b
+PLS_VER=042226c
 echo pls - $PLS_VER
 echo -------------------
 
@@ -7,10 +7,13 @@ echo -------------------
 if [[ "$1" == "update" ]]; then
 
   if [[ "$2" == "self" ]]; then
+    echo pretend this is self updating
     # Source - https://stackoverflow.com/a/246128
     # Posted by dogbane, modified by community. See post 'Timeline' for change history
     # Retrieved 2026-04-22, License - CC BY-SA 4.0
     SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+    echo $SCRIPT_DIR
 
     if command -v wget &>/dev/null # yo do we have wget
     then
