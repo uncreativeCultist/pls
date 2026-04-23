@@ -1,5 +1,5 @@
 #!/bin/bash
-PLS_VER=042326b
+PLS_VER=042326c
 
 ## please update ----------------------------------
 if [[ "$1" == "update" ]]; then
@@ -125,6 +125,9 @@ fi
   else
     echo "package '$2' couldn't be found :("
   fi
+elif [[ "$1" == "" ]]; then
+  echo "pls is not supposed to be ran on it's own!  "
+  echo 'maybe try "pls help" to see possible arguments?'
 else
   echo "'pls $1' is not a recognized command, sorry :("
   echo 'maybe try "pls help" to see possible arguments?'
