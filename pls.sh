@@ -1,5 +1,5 @@
 #!/bin/bash
-PLS_VER=042226d
+PLS_VER=042226e
 echo pls - $PLS_VER
 echo -------------------
 
@@ -15,6 +15,7 @@ if [[ "$1" == "update" ]]; then
     then
       rm "$SCRIPT_DIR/pls.sh"
       wget "https://raw.githubusercontent.com/uncreativeCultist/pls/refs/heads/main/pls.sh" -P $SCRIPT_DIR 
+      chmod +x "$SCRIPT_DIR/pls.sh"
       echo "pls has been updated!"
     else
       echo "update self requires wget. please install wget!!"
