@@ -12,7 +12,8 @@ more features are soon to come, i promise.
 if you don't know if your system uses bash, look it up pls <3  
 
 step 1: open a terminal  
-step 2: copy the following text: `wget https://raw.githubusercontent.com/uncreativeCultist/pls/refs/heads/main/setup-pls-bash.sh -O - | sh`  
+step 2: copy the following text:  
+`wget https://raw.githubusercontent.com/uncreativeCultist/pls/refs/heads/main/setup-pls-bash.sh -O - | sh`  
 step 3. paste the text into the terminal using ctrl + shift + v  
 step 4. press enter  
 congrats, pls is now installed on your system! 
