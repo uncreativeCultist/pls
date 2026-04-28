@@ -7,6 +7,7 @@ this is a passion project made to help my tech-illiterate boyfriend with linux c
 `pls update` - updates/upgrades as packages on your system across multiple package managers (pls not included)  
 `pls update self` - updates pls  
 `pls install` - install programs to your system using multiple package managers  
+`pls remove` - remove programs from your system using multiple package managers  
 more features are soon to come, i promise.
 # installation
 **warning: this currently only works for bash based distros!**  
