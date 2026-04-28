@@ -1,5 +1,5 @@
 #!/bin/bash
-PLS_VER=042326d
+PLS_VER=042826a
 
 ## please update ----------------------------------
 if [[ "$1" == "update" ]]; then
@@ -38,6 +38,12 @@ if [[ "$1" == "update" ]]; then
       sudo pacman -Syu
     fi
 
+    if command -v dnf &>/dev/null # dnf handling - fedora
+    then
+      echo "updating dnf packages"
+      sudo dnf upgrade --refresh
+    fi
+
     if command -v flatpak &>/dev/null # flatpak handling
     then
       echo "updating flatpaks"
@@ -61,7 +67,7 @@ if [[ "$1" == "update" ]]; then
       fi
     fi
 
-    read -p "do you wanna reboot? (you probably should tbh) (y/n): " -n 1 -r
+    read -p "do you wanna reboot? (you probably should if you updated a lot of stuff.) (y/n): " -n 1 -r
     echo   
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
@@ -75,6 +81,7 @@ elif [[ "$1" == "help" ]]; then
   echo "pls update - updates/upgrades all packages on your system across multiple package managers (pls not included)"
   echo pls update self - updates pls
   echo "pls install - install programs to your system using multiple package managers"
+  echo "pls remove - remove programs from your system using multiple package managers"
 elif [[ "$1" == "install" ]]; then
   DIDWEGETIT=notyet
 
@@ -118,11 +125,90 @@ elif [[ "$1" == "install" ]]; then
         echo   
     fi
   fi
+
+  if [[ "$DIDWEGETIT" != "yeah" ]]; then
+    if command -v dnf &>/dev/null # dnf handling - fedora
+    then
+      echo "installing using dnf"
+      if sudo dnf install $2; then
+        DIDWEGETIT=yeah
+      else
+        DIDWEGETIT=notyet
+        echo "couldn't find it using dnf, continuing on..."
+        echo   
+    fi
+  fi
+  fi
 fi
 
 
   if [[ "$DIDWEGETIT" == "yeah" ]]; then
     echo "package '$2' should be installed now!"
+  else
+    echo "package '$2' couldn't be found :("
+  fi
+elif [[ "$1" == "remove" ]]; then
+  DIDWEREMOVEIT=notyet
+
+  if [[ "$DIDWEREMOVEIT" != "yeah" ]]; then
+    if command -v apt-get &>/dev/null # apt-get handling - debian
+    then
+      echo "uninstalling using apt-get"
+      if sudo apt-get remove $2; then
+        DIDWEREMOVEIT=yeah
+      else
+        echo "couldn't find it using apt-get, continuing on..."
+        echo   
+        DIDWEREMOVEIT=notyet
+      fi
+    fi
+  fi
+
+  if [[ "$DIDWEREMOVEIT" != "yeah" ]]; then
+    if command -v pacman &>/dev/null # pacman handling - arch
+    then
+      echo "uninstalling using pacman"
+      if sudo pacman -R $2; then
+        DIDWEREMOVEIT=yeah
+      else
+        DIDWEREMOVEIT=notyet
+        echo "couldn't find it using pacman, continuing on..."
+        echo   
+      fi
+    fi
+  fi
+
+  # flatpak is weird and requires the EXACT package name. just commenting this out for rn
+  #if [[ "$DIDWEREMOVEIT" != "yeah" ]]; then
+  #  if command -v flatpak &>/dev/null # flatpak handling
+  #  then
+  #    echo "uninstalling using flatpak"
+  #    if sudo flatpak uninstall $2; then
+  #      DIDWEREMOVEIT=yeah
+  #    else
+  #      DIDWEREMOVEIT=notyet
+  #      echo "couldn't find it using flatpak, continuing on..."
+  #      echo   
+  #  fi
+  #fi
+
+  if [[ "$DIDWEREMOVEIT" != "yeah" ]]; then
+    if command -v dnf &>/dev/null # dnf handling - fedora
+    then
+      echo "uninstalling using dnf"
+      if sudo dnf remove $2; then
+        DIDWEREMOVEIT=yeah
+      else
+        DIDWEREMOVEIT=notyet
+        echo "couldn't find it using dnf, continuing on..."
+        echo   
+    fi
+  fi
+fi
+
+
+  if [[ "$DIDWEREMOVEIT" == "yeah" ]]; then
+    echo "package '$2' should be removed now!"
   else
     echo "package '$2' couldn't be found :("
   fi
